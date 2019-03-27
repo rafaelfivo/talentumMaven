@@ -6,6 +6,8 @@
 package model.Entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,21 +21,21 @@ import javax.persistence.ManyToOne;
  * @author oem
  */
 @Entity
-public class Capacidade implements Serializable {
+public class ConFinal implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Lob
-    @Basic(optional = false)
-    private String descricao;
-
-    @Basic(optional = false)
-    private Integer tipo;
+    @Basic(optional = true)
+    private String listObj;
 
     @ManyToOne
-    private Curso curso = new Curso();
+    private UniCopetencias uni = new UniCopetencias();
+
+    @ManyToOne
+    private EleCompetencias comp = new EleCompetencias();
 
     public long getId() {
         return id;
@@ -43,29 +45,31 @@ public class Capacidade implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getListObj() {
+        return listObj;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setListObj(String listObj) {
+        this.listObj = listObj;
     }
 
-    public Integer getTipo() {
-        return tipo;
+    public UniCopetencias getUni() {
+        return uni;
     }
 
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
+    public void setUni(UniCopetencias uni) {
+        this.uni = uni;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public EleCompetencias getComp() {
+        return comp;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setComp(EleCompetencias comp) {
+        this.comp = comp;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -78,13 +82,7 @@ public class Capacidade implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Capacidade other = (Capacidade) obj;
+        final ConFinal other = (ConFinal) obj;
         return this.id == other.id;
     }
-
-    @Override
-    public String toString() {
-        return descricao;
-    }
-    
 }
